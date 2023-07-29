@@ -25,7 +25,6 @@ class Bot(GoslingAgent):
             return
         self.set_intent(short_shot(self.foe_goal.location))
 
-        
         self.set_intent(drive(1000))
         targets = {
             'at_opponent_goal': (self.for_goal.left_post, self.foe_goal.right_post),
