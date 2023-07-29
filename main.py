@@ -14,16 +14,18 @@ class Bot(GoslingAgent):
         d1 = abs(self.ball.location.y - self.foe_goal.location.y)
         d2 = abs(self.me.location.y - self.foe_goal.location.y)
         is_in_front_of_ball =d1>d2
+
         if self.kickoff_flag:
-            # set_intent tells the bot what it's trying to do
              self.set_intent(kickoff())
              return
-         #if we're in front of the ball, retreat
-        if is_in_front_of_ball:
+        self.set_intent(goto(self.ball.location)) 
+
+        if is_in_front_of_ball():
             self.set_intent(goto(self.for_goal.location))
             return
         self.set_intent(short_shot(self.foe_goal.location))
-        # the line below tells the bot what it's trying to do
+
+        
         self.set_intent(drive(1000))
         targets = {
             'at_opponent_goal': (self.for_goal.left_post, self.foe_goal.right_post),
@@ -46,4 +48,4 @@ class Bot(GoslingAgent):
             self.set_intent(goto(target_boost.location))
             return
         
-        #print(f' my x position is:(self.me.location) ')
+      
